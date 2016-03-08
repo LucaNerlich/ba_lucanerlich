@@ -1,9 +1,5 @@
 /ba_lucanerlich.ipr
-/ba_lucanerlich.iws
 /target
-java/out/
-java/.idea/
-java/ba_lucanerlich.ids
-/libraries
-.idea/
 *.iml
+/har-files
+/.idea
