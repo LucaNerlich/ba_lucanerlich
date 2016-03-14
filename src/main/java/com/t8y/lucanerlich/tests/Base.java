@@ -7,6 +7,7 @@ import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.proxy.CaptureType;
 import net.sf.randomjunit.RandomTestRunner;
 import org.junit.Rule;
+import org.junit.Test;
 import org.junit.rules.ExternalResource;
 import org.junit.rules.TestRule;
 import org.junit.rules.TestWatcher;
@@ -47,6 +48,7 @@ public class Base implements Config {
             // ... define whitelist
             List<String> allowUrlPatterns = new ArrayList<String>();
             allowUrlPatterns.add("http://the-internet.herokuapp.com.*");
+            allowUrlPatterns.add("http://www.google.com.*");
             // all URLs matching the above defined patterns blocked with a 404
             proxy.whitelistRequests(allowUrlPatterns, 404);
 

@@ -16,7 +16,7 @@ public class Login extends Base {
 
     public Login(BrowserMobProxy proxy, WebDriver driver) {
         super(proxy, driver);
-        visit("/login");
+        visit("http://the-internet.herokuapp.com/login");
         assertTrue("The login form is not present", isDisplayed(loginFormLocator));
     }
 

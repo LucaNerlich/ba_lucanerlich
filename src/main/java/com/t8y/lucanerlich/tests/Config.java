@@ -3,7 +3,7 @@ package com.t8y.lucanerlich.tests;
 // All these properties have default values and can be changed by using -D arguments
 
 public interface Config {
-    final String baseUrl = System.getProperty("baseUrl", "http://the-internet.herokuapp.com");
+    final String baseUrl = System.getProperty("baseUrl", "http://");
     final String host = System.getProperty("host", "localhost");
     final String browser = System.getProperty("browser", "Firefox");
     final String windowWidth = System.getProperty("windowWidth", String.valueOf(1280));
