@@ -37,5 +37,4 @@ public class Login extends Base {
     public Boolean httpStatusOfPageIs200() {
         return getStatusOfHttpResponse(".*/login") == 200;
     }
-
 }
