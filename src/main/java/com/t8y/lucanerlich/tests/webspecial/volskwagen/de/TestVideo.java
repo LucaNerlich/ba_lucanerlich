@@ -17,13 +17,13 @@ public class TestVideo extends Base {
     @Before
     public void setUp() {
         video = new Video(proxy, driver);
-        //doenst load page
+        //doesnt load page
         System.out.println();
     }
 
     @Test
     @Category(Deep.class)
-    public void succeeded() {
-//        video.playVideo();
+    public void playVideo() {
+        video.playVideo();
     }
 }
