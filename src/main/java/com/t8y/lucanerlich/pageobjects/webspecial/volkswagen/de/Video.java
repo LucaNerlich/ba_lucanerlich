@@ -15,9 +15,13 @@ public class Video extends Base {
 
     public Video(BrowserMobProxy proxy, WebDriver driver) {
         super(proxy, driver);
-        visit("http://webspecial.volkswagen.de/more-than-a-car/com/en");
-        WebElement videoPlayButton = find(By.className("mejs-button mejs-playpause-button mejs-play"));
-        System.out.println();
+        visit("webspecial.volkswagen.de/more-than-a-car/com/en");
+
+        waitForIsDisplayed(videoBox, 10);
+        WebElement imageBox = driver.findElement(By.className("image-wrapper"));
+        System.out.println(imageBox.getLocation());
+
+        //WebElement videoPlayButton = find(By.className("mejs-button mejs-playpause-button mejs-play"));
     }
 
     public void playVideo() {

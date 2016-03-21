@@ -7,7 +7,6 @@ import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.proxy.CaptureType;
 import net.sf.randomjunit.RandomTestRunner;
 import org.junit.Rule;
-import org.junit.Test;
 import org.junit.rules.ExternalResource;
 import org.junit.rules.TestRule;
 import org.junit.rules.TestWatcher;
@@ -23,10 +22,15 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Properties;
 
 @RunWith(RandomTestRunner.class)
 public class Base implements Config {
@@ -45,12 +49,14 @@ public class Base implements Config {
             DesiredCapabilities capabilities = new DesiredCapabilities();
 
             // Browsermob....
-            // ... define whitelist
+            /*
             List<String> allowUrlPatterns = new ArrayList<String>();
             allowUrlPatterns.add("http://the-internet.herokuapp.com.*");
-            allowUrlPatterns.add("http://www.google.com.*");
+            allowUrlPatterns.add("https://www.google.*");
+            allowUrlPatterns.add("http://webspecial.volkswagen.de/more-than-a-car/com/.*");
             // all URLs matching the above defined patterns blocked with a 404
             proxy.whitelistRequests(allowUrlPatterns, 404);
+            */
 
             // ... start the proxy, get the Selenium proxy object, configure it as a desired capability
             // ... plus, create a HAR object and configure which information is being captured in it
@@ -81,8 +87,6 @@ public class Base implements Config {
                 try {
                     properties.load(stream);
                     stream.close();
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -117,7 +121,6 @@ public class Base implements Config {
                     capabilities.setCapability("device", device);
                     capabilities.setCapability("deviceOrientation", deviceOrientation);
                     driver = new RemoteWebDriver(new URL(browserstackUrl), capabilities);
-
                 }
 
             } else if (host.equals("localhost")) {
@@ -131,9 +134,7 @@ public class Base implements Config {
                 }
 
                 driver.manage().window().setSize(new Dimension(Integer.parseInt(windowWidth), Integer.parseInt(windowHeight)));
-
             }
-
         }
 
         @Override
@@ -151,10 +152,8 @@ public class Base implements Config {
             }
 
             proxy.stop();
-
             driver.quit();
         }
-
     };
 
     @Rule
@@ -163,5 +162,4 @@ public class Base implements Config {
             testName = description.getDisplayName();
         }
     };
-
 }

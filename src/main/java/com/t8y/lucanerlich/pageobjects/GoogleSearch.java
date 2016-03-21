@@ -14,9 +14,9 @@ public class GoogleSearch extends Base {
     }
 
     public void searchFor(String term){
-        visit("http://www.google.com");
+        visit("https://www.google.de");
         WebElement element = find(By.name("q"));
-        element.sendKeys("term");
+        element.sendKeys(term);
         element.submit();
     }
 }

@@ -1,7 +1,6 @@
 package com.t8y.lucanerlich.tests;
 
 import com.t8y.lucanerlich.pageobjects.GoogleSearch;
-import com.t8y.lucanerlich.pageobjects.Login;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,7 +17,7 @@ public class TestGoogleSearch extends Base {
     }
 
     @Test
-    public void seach(){
+    public void search() {
         googleSearch.searchFor("lucanerlich");
     }
 }

@@ -65,7 +65,7 @@
     <properties>
         <osType>desktop</osType>
         <browser>Firefox</browser>
-        <browser_version>39</browser_version>
+        <browser_version>45</browser_version>
         <os>Windows</os>
         <os_version>7</os_version>
         <windowWidth>1280</windowWidth>

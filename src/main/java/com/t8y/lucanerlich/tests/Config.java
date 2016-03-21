@@ -19,7 +19,7 @@ public interface Config {
 
     // ... Desktop
     final String osType = System.getProperty("osType", "desktop");
-    final String browser_version = System.getProperty("browser_version", "39.0");
+    final String browser_version = System.getProperty("browser_version", "45.0.1");
     final String os = System.getProperty("os", "Windows");
     final String os_version = System.getProperty("os_version", "7");
     final String resolution = System.getProperty("resolution", "1920x1080");
