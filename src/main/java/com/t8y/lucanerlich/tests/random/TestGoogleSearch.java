@@ -1,6 +1,7 @@
-package com.t8y.lucanerlich.tests;
+package com.t8y.lucanerlich.tests.random;
 
-import com.t8y.lucanerlich.pageobjects.GoogleSearch;
+import com.t8y.lucanerlich.pageobjects.random.GoogleSearch;
+import com.t8y.lucanerlich.tests.Base;
 import org.junit.Before;
 import org.junit.Test;
 

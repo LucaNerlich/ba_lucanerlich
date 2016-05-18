@@ -37,7 +37,9 @@ public class Base implements Config {
 
     protected BrowserMobProxy proxy = new BrowserMobProxyServer();
     protected WebDriver driver;
-    private String testName;
+
+    //HAR Name
+    private String httpArchiveVW;
 
     @Rule
     public ExternalResource resource = new ExternalResource() {
@@ -75,7 +77,7 @@ public class Base implements Config {
             proxy.disableHarCaptureTypes(disable);
             // proxy.addHeader("User-Agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X; en-us) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53");
             proxy.start(0);
-            proxy.newHar(testName);
+            proxy.newHar(httpArchiveVW);
             Proxy seleniumProxy = ClientUtil.createSeleniumProxy(proxy);
             capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
 
@@ -99,7 +101,7 @@ public class Base implements Config {
 
                 capabilities.setCapability("project", project);
                 capabilities.setCapability("build", build);
-                capabilities.setCapability("name", testName);
+                capabilities.setCapability("name", httpArchiveVW);
                 capabilities.setCapability("browserstack.debug", browserstackDebug);
                 capabilities.setCapability("browserstack.video", browserstackVideo);
                 capabilities.setCapability("acceptSslCerts", acceptSslCerts);
@@ -132,25 +134,22 @@ public class Base implements Config {
                 } else if (browser.equals("Safari")) {
                     driver = new SafariDriver(capabilities);
                 }
-
                 driver.manage().window().setSize(new Dimension(Integer.parseInt(windowWidth), Integer.parseInt(windowHeight)));
             }
         }
 
         @Override
         protected void after() {
-
             // Browsermob
             // get the HAR data and write it to a file
-            Har har = proxy.getHar();
+            Har httpArchive = proxy.getHar();
             try {
                 String directory = "har-files/";
                 new File(directory).mkdirs();
-                har.writeTo(new File(directory + testName + new SimpleDateFormat("yyMMdd-HHmmss").format(new Date()) + ".json"));
+                httpArchive.writeTo(new File(directory + httpArchiveVW + new SimpleDateFormat("yyMMdd-HHmmss").format(new Date()) + ".json"));
             } catch (IOException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
-
             proxy.stop();
             driver.quit();
         }
@@ -159,7 +158,7 @@ public class Base implements Config {
     @Rule
     public TestRule watcher = new TestWatcher() {
         protected void starting(Description description) {
-            testName = description.getDisplayName();
+            httpArchiveVW = description.getDisplayName();
         }
     };
 }

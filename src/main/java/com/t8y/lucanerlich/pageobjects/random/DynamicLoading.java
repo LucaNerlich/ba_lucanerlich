@@ -1,5 +1,6 @@
-package com.t8y.lucanerlich.pageobjects;
+package com.t8y.lucanerlich.pageobjects.random;
 
+import com.t8y.lucanerlich.pageobjects.Base;
 import net.lightbody.bmp.BrowserMobProxy;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;

@@ -16,30 +16,30 @@ import static org.junit.Assert.fail;
 public class Base implements Config {
 
     private BrowserMobProxy proxy = new BrowserMobProxyServer();
-    private WebDriver driver;
+    private WebDriver webDriver;
 
     public Base(BrowserMobProxy proxy, WebDriver driver) {
         this.proxy = proxy;
-        this.driver = driver;
+        this.webDriver = driver;
     }
 
     public void visit(String url) {
         // First, open URL...
         if (url.contains("http")) {
-            driver.get(url);
+            webDriver.get(url);
         } else {
-            driver.get(baseUrl + url);
+            webDriver.get(baseUrl + url);
         }
 
         // ... after that, check whether the page is showing a phishing warning (iOS) and if so, click the ignore link
-        if (driver.getTitle().contains("Possible Phishing Site")) {
+        if (webDriver.getTitle().contains("Possible Phishing Site")) {
             System.out.println("The page is showing a phishing warning on iOS ");
             click(By.id("ignore_this_warning"));
         }
     }
 
     public WebElement find(By locator) {
-        return driver.findElement(locator);
+        return webDriver.findElement(locator);
     }
 
     public void click(By locator) {
@@ -65,11 +65,11 @@ public class Base implements Config {
     }
 
     public void switchContextToiFrame(By locator) {
-        driver.switchTo().frame(find(locator));
+        webDriver.switchTo().frame(find(locator));
     }
 
     public String getClassName(By locator) {
-        return driver.findElement(locator).getAttribute("class");
+        return webDriver.findElement(locator).getAttribute("class");
     }
 
     public Boolean isDisplayed(By locator) {
@@ -93,7 +93,7 @@ public class Base implements Config {
     // Used by waitForIsDisplayed, default wait time is 5sec
     private void waitFor(ExpectedCondition<WebElement> condition, Integer timeout) {
         timeout = timeout != null ? timeout : 5;
-        WebDriverWait wait = new WebDriverWait(driver, timeout);
+        WebDriverWait wait = new WebDriverWait(webDriver, timeout);
         wait.until(condition);
     }
 
@@ -115,7 +115,7 @@ public class Base implements Config {
     // Used by waitForUrlPart
     private void waitForUrl(ExpectedCondition<Boolean> urlContainsExpectedPart, Integer timeout) {
         timeout = timeout != null ? timeout : 5;
-        WebDriverWait wait = new WebDriverWait(driver, timeout);
+        WebDriverWait wait = new WebDriverWait(webDriver, timeout);
         wait.until(urlContainsExpectedPart);
     }
 
@@ -137,7 +137,7 @@ public class Base implements Config {
     // Used by waitForClassName
     private void waitForClassName(ExpectedCondition<Boolean> classNameContainsString, Integer timeout) {
         timeout = timeout != null ? timeout : 5;
-        WebDriverWait wait = new WebDriverWait(driver, timeout);
+        WebDriverWait wait = new WebDriverWait(webDriver, timeout);
         wait.until(classNameContainsString);
     }
 

@@ -1,6 +1,7 @@
-package com.t8y.lucanerlich.tests;
+package com.t8y.lucanerlich.tests.random;
 
-import com.t8y.lucanerlich.pageobjects.Login;
+import com.t8y.lucanerlich.pageobjects.random.Login;
+import com.t8y.lucanerlich.tests.Base;
 import com.t8y.lucanerlich.tests.groups.Deep;
 import com.t8y.lucanerlich.tests.groups.Shallow;
 import org.junit.Before;
