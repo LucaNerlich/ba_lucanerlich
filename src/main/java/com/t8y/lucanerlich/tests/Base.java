@@ -39,7 +39,7 @@ public class Base implements Config {
     protected WebDriver driver;
 
     //HAR Name
-    private String httpArchiveVW;
+    private String httpArchive;
 
     @Rule
     public ExternalResource resource = new ExternalResource() {
@@ -77,7 +77,7 @@ public class Base implements Config {
             proxy.disableHarCaptureTypes(disable);
             // proxy.addHeader("User-Agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 7_0 like Mac OS X; en-us) AppleWebKit/537.51.1 (KHTML, like Gecko) Version/7.0 Mobile/11A465 Safari/9537.53");
             proxy.start(0);
-            proxy.newHar(httpArchiveVW);
+            proxy.newHar(httpArchive);
             Proxy seleniumProxy = ClientUtil.createSeleniumProxy(proxy);
             capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
 
@@ -101,7 +101,7 @@ public class Base implements Config {
 
                 capabilities.setCapability("project", project);
                 capabilities.setCapability("build", build);
-                capabilities.setCapability("name", httpArchiveVW);
+                capabilities.setCapability("name", httpArchive);
                 capabilities.setCapability("browserstack.debug", browserstackDebug);
                 capabilities.setCapability("browserstack.video", browserstackVideo);
                 capabilities.setCapability("acceptSslCerts", acceptSslCerts);
@@ -146,7 +146,7 @@ public class Base implements Config {
             try {
                 String directory = "har-files/";
                 new File(directory).mkdirs();
-                httpArchive.writeTo(new File(directory + httpArchiveVW + new SimpleDateFormat("yyMMdd-HHmmss").format(new Date()) + ".json"));
+                httpArchive.writeTo(new File(directory + Base.this.httpArchive + new SimpleDateFormat("yyMMdd-HHmmss").format(new Date()) + ".json"));
             } catch (IOException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
@@ -158,7 +158,7 @@ public class Base implements Config {
     @Rule
     public TestRule watcher = new TestWatcher() {
         protected void starting(Description description) {
-            httpArchiveVW = description.getDisplayName();
+            httpArchive = description.getDisplayName();
         }
     };
 }
