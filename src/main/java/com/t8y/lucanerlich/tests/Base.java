@@ -173,12 +173,10 @@ public class Base implements Config {
         return query_pairs;
     }
 
-    public boolean compareStringMap(Map<String, String> input, Map<String, String> expectedValue){
-        boolean allEqual = false;
-        for (Map.Entry<String, String> expectedValueEntry : expectedValue.entrySet())
-        {
-            allEqual = input.get(expectedValueEntry.getKey()).equals(expectedValueEntry.getValue());
+    public boolean compareStringMap(Map<String, String> input, Map<String, String> expectedValue) {
+        for (Map.Entry<String, String> expectedValueEntry : expectedValue.entrySet()) {
+            if (!input.get(expectedValueEntry.getKey()).equals(expectedValueEntry.getValue())) return false;
         }
-        return allEqual;
+        return true;
     }
 }
