@@ -34,6 +34,9 @@ public class TestKundenportal extends Base {
 
     @Test
     public void visitKundenportal() {
+        //todo Problem:
+        //Sucht in allen requests. Reicht: "wurde min. 1x genau so gefunden"?
+
         kundenportal.visitKundenportal();
         Har httpArchive = proxy.getHar();
         List<HarEntry> entries = httpArchive.getLog().getEntries();
@@ -48,33 +51,19 @@ public class TestKundenportal extends Base {
 
                 for (String part : parts) {
                     Matcher m = p.matcher(part);
-                    if (m.matches()) {
-                        parameter.put(m.group(1), m.group(2));
-                    }
+                    if (m.matches()) parameter.put(m.group(1), m.group(2));
                 }
-                System.out.println();
 
-
-                //calls .equals()
-                //todo Problem:
-                //Sucht in allen requests. Reicht: "wurde min. 1x genau so gefunden"?
-
-
-                if (parameter.get("pageName").equals("MS : Car-Net : Customer Portals")) {
-                    if (parameter.get("c8").equals("MS-Car-Net-de-de")) {
-                        if (parameter.get("c32").equals("MS-Car-Net")) {
-                            if (parameter.get("v8").equals("None")) {
-                                if (parameter.get("c42").equals("D=v8+\" > \"+pageName")) {
-                                    if (parameter.get("v56").equals("None")) {
-                                        if (parameter.get("v72").equals("None")) {
-                                            trackingReqFound = true;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                Map<String, String> expectedValues = new HashMap<String, String>();
+                expectedValues.put("pageName", "MS : Car-Net : Customer Portals");
+                expectedValues.put("c8", "MS-Car-Net-de-de");
+                expectedValues.put("c32", "MS-Car-Net");
+                expectedValues.put("v8", "None");
+                expectedValues.put("c42", "D=v8+\" > \"+pageName");
+                expectedValues.put("v56", "None");
+                expectedValues.put("v72", "None");
+                trackingReqFound = compareStringMap(parameter, expectedValues);
+                if (trackingReqFound) break;
             }
         }
         assertTrue(trackingReqFound);
