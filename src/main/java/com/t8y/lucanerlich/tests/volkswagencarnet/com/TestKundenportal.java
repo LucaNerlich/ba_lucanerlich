@@ -27,14 +27,15 @@ public class TestKundenportal extends Base {
         kundenportal = new Kundenportal(proxy, driver);
     }
 
+    /*
     @Test
     public void visitCarNetHome() {
         kundenportal.visitCarNetHome();
     }
+    */
 
     @Test
     public void visitKundenportal() {
-        //todo Problem:
         //Sucht in allen requests. Reicht: "wurde min. 1x genau so gefunden"?
 
         kundenportal.visitKundenportal();
@@ -62,6 +63,7 @@ public class TestKundenportal extends Base {
                 expectedValues.put("c42", "D=v8+\" > \"+pageName");
                 expectedValues.put("v56", "None");
                 expectedValues.put("v72", "None");
+
                 trackingReqFound = compareStringMap(parameter, expectedValues);
                 if (trackingReqFound) break;
             }
