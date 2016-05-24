@@ -37,18 +37,22 @@ public class TestKundenportal extends Base {
     @Test
     public void visitKundenportal() {
         //Sucht in allen requests. Reicht: "wurde min. 1x genau so gefunden"?
+        //Was passiert bei doppelten Request Logs, ist dies als Fehler zu sehen?
 
         kundenportal.visitKundenportal();
         Har httpArchive = proxy.getHar();
+
         List<HarEntry> entries = httpArchive.getLog().getEntries();
+        Pattern p = Pattern.compile("([^=]+)\\=([^&#]+)");
         boolean trackingReqFound = false;
+        
         for (HarEntry entry : entries) {
             String url = entry.getRequest().getUrl();
             if (url.contains("metric")) {
                 Map<String, String> parameter = new HashMap();
 
                 String[] parts = url.split("\\?")[1].split("&");
-                Pattern p = Pattern.compile("([^=]+)\\=([^&#]+)");
+
 
                 for (String part : parts) {
                     Matcher m = p.matcher(part);
