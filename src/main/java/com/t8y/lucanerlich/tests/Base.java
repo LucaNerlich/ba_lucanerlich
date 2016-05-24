@@ -22,15 +22,11 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Properties;
+import java.util.*;
 
 @RunWith(RandomTestRunner.class)
 public class Base implements Config {
@@ -47,10 +43,10 @@ public class Base implements Config {
         @Override
         protected void before() throws Throwable {
 
-            // DesiredCapabilities capabilities is needed for Browserstack and Browsermob (oh, and even the local Webdriver instances)
+            // DesiredCapabilities capabilities is needed for Browserstack and Browsermob
             DesiredCapabilities capabilities = new DesiredCapabilities();
 
-            // Browsermob....
+            // Browsermob...
             /*
             List<String> allowUrlPatterns = new ArrayList<String>();
             allowUrlPatterns.add("http://the-internet.herokuapp.com.*");
@@ -148,7 +144,7 @@ public class Base implements Config {
                 new File(directory).mkdirs();
                 httpArchive.writeTo(new File(directory + Base.this.httpArchive + new SimpleDateFormat("yyMMdd-HHmmss").format(new Date()) + ".json"));
             } catch (IOException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                e.printStackTrace();
             }
             proxy.stop();
             driver.quit();
@@ -161,4 +157,19 @@ public class Base implements Config {
             httpArchive = description.getDisplayName();
         }
     };
+
+    public Map<String, List<String>> splitQuery(URL url) throws UnsupportedEncodingException {
+        final Map<String, List<String>> query_pairs = new LinkedHashMap<String, List<String>>();
+        final String[] pairs = url.getQuery().split("&");
+        for (String pair : pairs) {
+            final int idx = pair.indexOf("=");
+            final String key = idx > 0 ? URLDecoder.decode(pair.substring(0, idx), "UTF-8") : pair;
+            if (!query_pairs.containsKey(key)) {
+                query_pairs.put(key, new LinkedList<String>());
+            }
+            final String value = idx > 0 && pair.length() > idx + 1 ? URLDecoder.decode(pair.substring(idx + 1), "UTF-8") : null;
+            query_pairs.get(key).add(value);
+        }
+        return query_pairs;
+    }
 }

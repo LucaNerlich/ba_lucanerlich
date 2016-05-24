@@ -30,6 +30,4 @@ public class TestDynamicLoading extends Base {
         dynamicLoading.loadExample("2");
         assertTrue("Finish text didn't render after loading", dynamicLoading.finishTextPresent());
     }
-
-
 }
