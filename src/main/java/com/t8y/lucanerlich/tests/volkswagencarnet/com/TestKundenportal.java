@@ -45,14 +45,13 @@ public class TestKundenportal extends Base {
         List<HarEntry> entries = httpArchive.getLog().getEntries();
         Pattern p = Pattern.compile("([^=]+)\\=([^&#]+)");
         boolean trackingReqFound = false;
-        
+
         for (HarEntry entry : entries) {
             String url = entry.getRequest().getUrl();
             if (url.contains("metric")) {
                 Map<String, String> parameter = new HashMap();
 
                 String[] parts = url.split("\\?")[1].split("&");
-
 
                 for (String part : parts) {
                     Matcher m = p.matcher(part);

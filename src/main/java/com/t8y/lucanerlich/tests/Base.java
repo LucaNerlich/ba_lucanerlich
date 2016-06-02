@@ -158,7 +158,7 @@ public class Base implements Config {
         }
     };
 
-    public Map<String, List<String>> splitQuery(URL url) throws UnsupportedEncodingException {
+    protected Map<String, List<String>> splitQuery(URL url) throws UnsupportedEncodingException {
         final Map<String, List<String>> query_pairs = new LinkedHashMap<String, List<String>>();
         final String[] pairs = url.getQuery().split("&");
         for (String pair : pairs) {
@@ -173,9 +173,11 @@ public class Base implements Config {
         return query_pairs;
     }
 
-    public boolean compareStringMap(Map<String, String> input, Map<String, String> expectedValue) {
+    protected boolean compareStringMap(Map<String, String> input, Map<String, String> expectedValue) {
         for (Map.Entry<String, String> expectedValueEntry : expectedValue.entrySet()) {
-            if (!input.get(expectedValueEntry.getKey()).equals(expectedValueEntry.getValue())) return false;
+            if (!input.get(expectedValueEntry.getKey()).equals(expectedValueEntry.getValue())) {
+                return false;
+            }
         }
         return true;
     }
