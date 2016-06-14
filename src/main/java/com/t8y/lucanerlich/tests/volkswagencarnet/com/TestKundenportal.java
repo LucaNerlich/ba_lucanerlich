@@ -72,7 +72,12 @@ public class TestKundenportal extends Base {
                 if (trackingReqFound) break;
             }
         }
-        assertTrue(!trackingReqFound);
+        try {
+            assertTrue(trackingReqFound);
+        }catch (AssertionError error){
+            errorLevel.printTestMethodName(error.getMessage());
+            error.printStackTrace();
+        }
         errorLevel.isTestSuccessful(trackingReqFound);
     }
 }

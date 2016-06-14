@@ -2,6 +2,7 @@ package com.t8y.lucanerlich.reporting;
 
 /**
  * Created by lucan on 14.06.2016.
+ * Strategy Pattern
  */
 public interface ErrorLevel {
 
