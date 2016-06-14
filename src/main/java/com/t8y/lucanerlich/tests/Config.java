@@ -1,6 +1,6 @@
 package com.t8y.lucanerlich.tests;
 
-// All these properties have default values and can be changed by using -D arguments
+// AllRep these properties have default values and can be changed by using -D arguments
 // Firefox v47+: https://developer.mozilla.org/en-US/docs/Mozilla/QA/Marionette/WebDriver
 
 public interface Config {

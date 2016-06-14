@@ -1,13 +1,11 @@
-package com.t8y.lucanerlich.reporting.groups;
-
-import com.t8y.lucanerlich.reporting.ErrorBase;
+package com.t8y.lucanerlich.reporting;
 
 import java.time.LocalDate;
 
 /**
  * Created by lucan on 12.06.2016.
  */
-public class ErrorDebug extends ErrorBase {
+public class ErrorDebug extends ErrorBase implements ErrorLevel {
 
     private LocalDate timestamp = LocalDate.now();
 

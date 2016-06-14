@@ -1,6 +1,7 @@
 package com.t8y.lucanerlich.tests.volkswagencarnet.com;
 
 import com.t8y.lucanerlich.pageobjects.volkswagencarnet.com.Kundenportal;
+import com.t8y.lucanerlich.reporting.Exceptions.CompareException;
 import com.t8y.lucanerlich.tests.Base;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.core.har.HarEntry;
@@ -35,7 +36,7 @@ public class TestKundenportal extends Base {
     */
 
     @Test
-    public void visitKundenportal() {
+    public void visitKundenportal() throws CompareException {
         //Sucht in allen requests. Reicht: "wurde min. 1x genau so gefunden"?
         //Was passiert bei doppelten Request Logs, ist dies als Fehler zu sehen?
 
@@ -71,6 +72,7 @@ public class TestKundenportal extends Base {
                 if (trackingReqFound) break;
             }
         }
-        assertTrue(trackingReqFound);
+        assertTrue(!trackingReqFound);
+        errorLevel.isTestSuccessful(trackingReqFound);
     }
 }

@@ -1,5 +1,7 @@
 package com.t8y.lucanerlich.tests;
 
+import com.t8y.lucanerlich.reporting.ErrorLevel;
+import com.t8y.lucanerlich.reporting.ErrorLevelGroups.Debug;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.BrowserMobProxyServer;
 import net.lightbody.bmp.client.ClientUtil;
@@ -34,6 +36,7 @@ public class Base implements Config {
 
     protected BrowserMobProxy proxy = new BrowserMobProxyServer();
     protected WebDriver driver;
+    protected final ErrorLevel errorLevel = new Debug();
 
     //HAR Name
     private String httpArchive;
