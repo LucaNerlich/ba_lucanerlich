@@ -17,6 +17,7 @@ import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.MarionetteDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -124,6 +125,11 @@ public class Base implements Config {
             } else if (host.equals("localhost")) {
                 if (browser.equals("Firefox")) {
                     driver = new FirefoxDriver(capabilities);
+
+                    //since FFv47
+                    //System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/vendor/geckodriver.exe");
+                    //driver = new MarionetteDriver(capabilities);
+
                 } else if (browser.equals("Chrome")) {
                     System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/vendor/chromedriver");
                     driver = new ChromeDriver(capabilities);
