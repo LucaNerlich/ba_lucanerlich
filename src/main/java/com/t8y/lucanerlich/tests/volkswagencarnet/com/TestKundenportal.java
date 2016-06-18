@@ -47,6 +47,15 @@ public class TestKundenportal extends Base {
         Pattern p = Pattern.compile("([^=]+)\\=([^&#]+)");
         boolean trackingReqFound = false;
 
+        Map<String, String> expectedValues = new HashMap<String, String>();
+        expectedValues.put("pageName", "MS : Car-Net : Customer Portals");
+        expectedValues.put("c8", "MS-Car-Net-de-de");
+        expectedValues.put("c32", "MS-Car-Net");
+        expectedValues.put("v8", "None");
+        expectedValues.put("c42", "D=v8+\" > \"+pageName");
+        expectedValues.put("v56", "None");
+        expectedValues.put("v72", "None");
+
         for (HarEntry entry : entries) {
             String url = entry.getRequest().getUrl();
             if (url.contains("metric")) {
@@ -58,15 +67,6 @@ public class TestKundenportal extends Base {
                     Matcher m = p.matcher(part);
                     if (m.matches()) parameter.put(m.group(1), m.group(2));
                 }
-
-                Map<String, String> expectedValues = new HashMap<String, String>();
-                expectedValues.put("pageName", "MS : Car-Net : Customer Portals");
-                expectedValues.put("c8", "MS-Car-Net-de-de");
-                expectedValues.put("c32", "MS-Car-Net");
-                expectedValues.put("v8", "None");
-                expectedValues.put("c42", "D=v8+\" > \"+pageName");
-                expectedValues.put("v56", "None");
-                expectedValues.put("v72", "None");
 
                 trackingReqFound = compareStringMap(parameter, expectedValues);
                 if (trackingReqFound) break;
