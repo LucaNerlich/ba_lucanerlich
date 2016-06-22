@@ -1,11 +1,15 @@
 package com.t8y.lucanerlich.reporting;
 
 /**
- * Created by lucan on 14.06.2016.
- * Strategy Pattern
+ * Created by lucan on 22.06.2016.
  */
 public interface ErrorLevel {
 
-    String printTestMethodName(String message);
-    boolean isTestSuccessful(boolean testResult);
+    /**
+     * Counts the number of successfull and failed test exectuions.
+     *
+     * @param testResult
+     * @return
+     */
+    void isTestSuccessful(boolean testResult, String methodName);
 }

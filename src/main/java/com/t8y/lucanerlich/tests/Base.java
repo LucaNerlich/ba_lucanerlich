@@ -1,7 +1,8 @@
 package com.t8y.lucanerlich.tests;
 
+import com.t8y.lucanerlich.reporting.ErrorDebug;
+import com.t8y.lucanerlich.reporting.ErrorBase;
 import com.t8y.lucanerlich.reporting.ErrorLevel;
-import com.t8y.lucanerlich.reporting.ErrorLevelGroups.Debug;
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.BrowserMobProxyServer;
 import net.lightbody.bmp.client.ClientUtil;
@@ -10,6 +11,7 @@ import net.lightbody.bmp.proxy.CaptureType;
 import net.sf.randomjunit.RandomTestRunner;
 import org.junit.Rule;
 import org.junit.rules.ExternalResource;
+import org.junit.rules.TestName;
 import org.junit.rules.TestRule;
 import org.junit.rules.TestWatcher;
 import org.junit.runner.Description;
@@ -19,7 +21,6 @@ import org.openqa.selenium.Proxy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.firefox.MarionetteDriver;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -30,16 +31,21 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Pattern;
 
 @RunWith(RandomTestRunner.class)
 public class Base implements Config {
 
     protected BrowserMobProxy proxy = new BrowserMobProxyServer();
     protected WebDriver driver;
-    protected final ErrorLevel errorLevel = new Debug();
+    protected final ErrorLevel errorLevel = new ErrorDebug();
+    protected Pattern urlParameterPattern = Pattern.compile("([^=]+)\\=([^&#]+)");
 
     //HAR Name
     private String httpArchive;
+
+    @Rule
+    public TestName name = new TestName();
 
     @Rule
     public ExternalResource resource = new ExternalResource() {

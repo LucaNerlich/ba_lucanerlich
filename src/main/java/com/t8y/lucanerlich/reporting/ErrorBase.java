@@ -1,24 +1,41 @@
 package com.t8y.lucanerlich.reporting;
 
+import static org.junit.Assert.assertTrue;
+
 /**
  * Created by lucan on 12.06.2016.
- *
+ * <p>
  * Use as base for error. Store report text body etc.
  * Groups are used to manage log / reporting level
  */
 public class ErrorBase {
 
-    private String message;
+    protected String levelIdentifier;
+    protected int successfullAssertions = 0;
+    protected int failedAssertions = 0;
 
-    public ErrorBase(String message) {
-        this.message = message;
+    public ErrorBase() {
+
     }
 
-    public String getMessage() {
-        return message;
+
+    public void printLog(String logMessage) {
+
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public String getLevelIdentifier() {
+        return levelIdentifier;
+    }
+
+    public void setLevelIdentifier(String levelIdentifier) {
+        this.levelIdentifier = levelIdentifier;
+    }
+
+    public int getSuccessfullAssertions() {
+        return successfullAssertions;
+    }
+
+    public int getFailedAssertions() {
+        return failedAssertions;
     }
 }

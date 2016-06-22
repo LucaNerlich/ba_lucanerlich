@@ -12,7 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertTrue;
 
@@ -44,7 +43,6 @@ public class TestKundenportal extends Base {
         Har httpArchive = proxy.getHar();
 
         List<HarEntry> entries = httpArchive.getLog().getEntries();
-        Pattern p = Pattern.compile("([^=]+)\\=([^&#]+)");
         boolean trackingReqFound = false;
 
         Map<String, String> expectedValues = new HashMap<String, String>();
@@ -64,7 +62,7 @@ public class TestKundenportal extends Base {
                 String[] parts = url.split("\\?")[1].split("&");
 
                 for (String part : parts) {
-                    Matcher m = p.matcher(part);
+                    Matcher m = urlParameterPattern.matcher(part);
                     if (m.matches()) parameter.put(m.group(1), m.group(2));
                 }
 
@@ -72,12 +70,6 @@ public class TestKundenportal extends Base {
                 if (trackingReqFound) break;
             }
         }
-        try {
-            assertTrue(trackingReqFound);
-        }catch (AssertionError error){
-            errorLevel.printTestMethodName(error.getMessage());
-            error.printStackTrace();
-        }
-        errorLevel.isTestSuccessful(trackingReqFound);
+        errorLevel.isTestSuccessful(trackingReqFound, name.getMethodName());
     }
 }
