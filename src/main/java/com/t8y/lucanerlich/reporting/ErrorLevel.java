@@ -12,4 +12,6 @@ public interface ErrorLevel {
      * @return
      */
     void isTestSuccessful(boolean testResult, String methodName);
+
+    void printLog();
 }

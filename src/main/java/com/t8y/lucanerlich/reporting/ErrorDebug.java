@@ -15,13 +15,17 @@ public class ErrorDebug extends ErrorBase implements ErrorLevel{
 
     public synchronized void isTestSuccessful(boolean testResult, String methodName) {
         try {
-            assertTrue(testResult);
             successfullAssertions++;
+            assertTrue(testResult);
             System.out.println(levelIdentifier + "OK : @" + methodName+ " : " + LocalDate.now());
         } catch (AssertionError error) {
             failedAssertions++;
             error.printStackTrace();
             System.out.println(levelIdentifier + "FAIL : @" + methodName+ " : " + LocalDate.now());
         }
+    }
+
+    public void printLog() {
+
     }
 }

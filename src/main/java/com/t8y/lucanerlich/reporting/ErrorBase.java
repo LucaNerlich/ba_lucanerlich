@@ -11,15 +11,10 @@ import static org.junit.Assert.assertTrue;
 public class ErrorBase {
 
     protected String levelIdentifier;
-    protected int successfullAssertions = 0;
-    protected int failedAssertions = 0;
+    protected static int successfullAssertions = 0;
+    protected static int failedAssertions = 0;
 
     public ErrorBase() {
-
-    }
-
-
-    public void printLog(String logMessage) {
 
     }
 
