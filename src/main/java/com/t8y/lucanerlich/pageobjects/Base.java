@@ -168,5 +168,4 @@ public class Base implements Config {
         fail("URL " + requestUrlRegExp + " ist in den geladenen Ressourcen nicht vorhanden");
         return null;
     }
-
 }

@@ -20,6 +20,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class TestKundenportal extends Base {
 
+    public static final String VW_METRIC = "metric";
     private Kundenportal kundenportal;
 
     @Before
@@ -56,8 +57,8 @@ public class TestKundenportal extends Base {
 
         for (HarEntry entry : entries) {
             String url = entry.getRequest().getUrl();
-            if (url.contains("metric")) {
-                Map<String, String> parameter = new HashMap();
+            if (url.contains(VW_METRIC)) {
+                Map<String, String> parameter = new HashMap<String, String>();
 
                 String[] parts = url.split("\\?")[1].split("&");
 

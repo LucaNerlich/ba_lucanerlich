@@ -188,9 +188,15 @@ public class Base implements Config {
         return query_pairs;
     }
 
-    protected boolean compareStringMap(Map<String, String> input, Map<String, String> expectedValue) {
-        for (Map.Entry<String, String> expectedValueEntry : expectedValue.entrySet()) {
-            if (!input.get(expectedValueEntry.getKey()).equals(expectedValueEntry.getValue())) {
+    /**
+     * Provide two key/value Sets. Compares each key to the corresponding value.
+     * @param input - String, String Map - Data you want to compare.
+     * @param spec - String, String Map - Specification to compare against.
+     * @return - boolean - true if k/v Pairs are the same, false if not
+     */
+    protected boolean compareStringMap(Map<String, String> input, Map<String, String> spec) {
+        for (Map.Entry<String, String> specEntry : spec.entrySet()) {
+            if (!input.get(specEntry.getKey()).equals(specEntry.getValue())) {
                 return false;
             }
         }
